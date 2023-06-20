@@ -1,7 +1,7 @@
 import React from "react"
 
 interface IPrintForm extends React.ComponentProps<"div"> {
-  data: object
+  data?: object
 }
 
 export function PrintForm({ data, className, ...rest }: IPrintForm) {
