@@ -57,7 +57,6 @@ export function App() {
                     "Product Design",
                     "Back-End",
                   ]}
-                  state={[skills, setSkills]}
                   {...props.field}
                 />
               )

@@ -16,7 +16,6 @@ interface ISelect
   extends Omit<HTMLAttributes<HTMLDivElement>, "onBlur" | "onChange">,
     ControllerRenderProps {
   options: string[]
-  state: [string[], Dispatch<SetStateAction<string[]>>]
   textAllOptionsSelected?: string
   clearAllOptionButton?: boolean
   value: string[]
@@ -24,7 +23,6 @@ interface ISelect
 
 export const Select = ({
   options,
-  state: stateTuple,
   textAllOptionsSelected,
   clearAllOptionButton,
   name,
