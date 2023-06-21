@@ -3,9 +3,9 @@
 @tailwind components;
 
 .form-element-style {
-  @apply px-3 py-1 rounded-lg text-white
+  @apply px-3 min-h-[3rem] rounded-lg text-white
 }
 
 .button-style {
-  @apply h-11
+  @apply h-12
 }
