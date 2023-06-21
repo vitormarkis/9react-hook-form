@@ -3,14 +3,17 @@ import { Select } from "../../components"
 import { IFormValues } from "../App"
 
 export function Experience() {
-  const { control, formState: { errors } } = useFormContext<IFormValues>()
-  
+  const {
+    control,
+    formState: { errors },
+  } = useFormContext<IFormValues>()
+
   return (
     <>
       <Controller
         name="skills"
         control={control}
-        render={(props) => {
+        render={props => {
           return (
             <Select
               options={[

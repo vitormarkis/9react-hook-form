@@ -1,5 +1,6 @@
 {
   "semi": false,
   "arrowParens": "avoid",
-  "singleAttributePerLine": true
+  "singleAttributePerLine": true,
+  "printWidth": 100
 }

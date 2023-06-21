@@ -11,6 +11,7 @@ export function Personal() {
         type="text"
         className="form-element-style"
         placeholder="First Name"
+        autoFocus
         autoComplete="off"
       />
       {errors.name?.message ? <p>{errors.name.message}</p> : null}

@@ -12,6 +12,7 @@ export function Professional() {
         className="form-element-style"
         placeholder="Linkedin"
         autoComplete="off"
+        autoFocus
       />
       {errors.linkedin?.message ? <p>{errors.linkedin.message}</p> : null}
     </>
