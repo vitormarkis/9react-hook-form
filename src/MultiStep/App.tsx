@@ -10,31 +10,41 @@ import { Experience } from "./steps/Experience"
 import { Professional } from "./steps/Professional"
 
 export type IFormValues = z.infer<typeof multiStepFormSchema>
+export type TValidationPerStep = Record<number, (keyof IFormValues)[]>
+
+const validationPerStep: TValidationPerStep = {
+  0: ["name", "surName"],
+  1: ["linkedin"],
+  2: ["skills"]
+}
 
 export function App() {
   const methods = useForm<IFormValues>({
     defaultValues,
-    resolver: zodResolver(multiStepFormSchema)
+    resolver: zodResolver(multiStepFormSchema),
+    mode: "onChange"
   })
   const { step, setStep } = useMultistepForm()
+  const { errors } = methods.formState
+
   const isInLastStep = step === 2
   const isInFirstStep = step === 0
-
-  if (Object.keys(methods.formState.errors).length) console.log("errors", methods.formState.errors)
+  const shouldGoForward = !validationPerStep[step].some(field => field in errors)
 
   const submitHandler: SubmitHandler<IFormValues> = (formData) => console.log(formData)
 
-  const handleActionButton = () => {
+  const handleActionButton = async () => {
     if(isInLastStep) return
-    setStep(s => ++s)
+    const allValidations = validationPerStep[step].map(field => methods.trigger(field))
+    const allFieldsValidated = await Promise.all(allValidations)
+    const allValidationPassed = allFieldsValidated.every(Boolean)
+    if(allValidationPassed) return setStep(s => ++s)
   }
 
   const handleGoBackButton = () => {
     if(isInFirstStep) return
     setStep(s => --s)
   }
-
-  console.log("step", step)
 
   return (
     <div className="bg-slate-900 min-h-screen grid place-items-center text-white overflow-y-scroll">
@@ -61,6 +71,7 @@ export function App() {
               type={isInLastStep ? "submit" : "button"}
               className="form-element-style button-style bg-emerald-500 disabled:bg-emerald-700"
               onClick={handleActionButton}
+              disabled={!shouldGoForward}
             >
               {isInLastStep ? "Enviar" : "Prosseguir"}
             </button>

@@ -3,7 +3,7 @@ import { Select } from "../../components"
 import { IFormValues } from "../App"
 
 export function Experience() {
-  const { control } = useFormContext<IFormValues>()
+  const { control, formState: { errors } } = useFormContext<IFormValues>()
   
   return (
     <>
@@ -27,6 +27,7 @@ export function Experience() {
           )
         }}
       />
+      {errors.skills?.message ? <p>{errors.skills.message}</p> : null}
     </>
   )
 }

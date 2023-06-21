@@ -2,7 +2,7 @@ import { useFormContext } from "react-hook-form"
 import { IFormValues } from "../App"
 
 export function Professional() {
-  const { register } = useFormContext<IFormValues>()
+  const { register, formState: { errors } } = useFormContext<IFormValues>()
   
   return (
     <>
@@ -13,6 +13,7 @@ export function Professional() {
         placeholder="Linkedin"
         autoComplete="off"
       />
+      {errors.linkedin?.message ? <p>{errors.linkedin.message}</p> : null}
     </>
   )
 }

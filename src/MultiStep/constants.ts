@@ -1,5 +1,6 @@
 export const defaultValues = {
-  linkedin: "",
   name: "",
+  surName: "",
+  linkedin: "",
   skills: []
 }
