@@ -6,3 +6,6 @@
 
 `cep-form.tsx`\
 [handleSubmit, register, formState, reset, watch, setValue, clearErrors, setError, defaultValues, resolver, criteriaMode, mode, formState_errors, formState_isDirty, formState_isSubmitting, cep_api, input_maxLength, button_reset]
+
+`multiselect.tsx`\
+[Controller, useForm, register, handleSubmit, control, formState, defaultValues, submitHandler, render, fieldState, formState_errors, submit]
