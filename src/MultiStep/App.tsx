@@ -26,7 +26,7 @@ export function App() {
   const methods = useForm<IFormValues>({
     defaultValues,
     resolver: zodResolver(multiStepFormSchema),
-    mode: "onChange",
+    mode: "onTouched",
   })
   const { step, setStep } = useMultistepForm()
   const { errors } = methods.formState
@@ -36,7 +36,9 @@ export function App() {
   const isInFirstStep = step === 0
   const shouldGoForward = !validationPerStep[step].some(field => field in errors)
 
-  const submitHandler: SubmitHandler<IFormValues> = formData => console.log(formData)
+  const submitHandler: SubmitHandler<IFormValues> = formData => {
+    console.log("submitHandler", formData)
+  }
 
   const handleActionButton = async () => {
     if (isInLastStep) return
@@ -52,7 +54,8 @@ export function App() {
   }
 
   useEffect(() => {
-    if (zipCode.length === 8) {
+    const validZipCode = zipCode.length === 8
+    if (validZipCode) {
       fetch(`https://viacep.com.br/ws/${zipCode}/json/`)
         .then(response => response.json())
         .then((data: APICep) => {

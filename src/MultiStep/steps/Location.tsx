@@ -1,12 +1,37 @@
-import { useFormContext } from "react-hook-form"
+import { useFormContext, Controller } from "react-hook-form"
 import { IFormValues } from "../App"
+import { PatternFormat } from "react-number-format"
 
 export function Location() {
-  const { register, formState: { errors } } = useFormContext<IFormValues>()
-  
+  const {
+    control,
+    register,
+    formState: { errors },
+  } = useFormContext<IFormValues>()
+
   return (
     <>
-      <input
+      <Controller
+        name="zipCode"
+        control={control}
+        render={({ field }) => (
+          <PatternFormat
+            className="form-element-style"
+            defaultValue={field.value}
+            valueIsNumericString
+            format="#####-###"
+            placeholder="00000-000"
+            onChange={e => {
+              const newEvent = e.target.value.replace(/\D/g, "")
+              field.onChange({ ...e, target: { ...e.target, value: newEvent } })
+            }}
+            onBlur={field.onBlur}
+          />
+        )}
+      />
+      {errors.zipCode?.message ? <p>{errors.zipCode.message}</p> : null}
+
+      {/* <input
         {...register("zipCode")}
         type="text"
         className="form-element-style"
@@ -14,7 +39,7 @@ export function Location() {
         autoComplete="off"
         autoFocus
       />
-      {errors.zipCode?.message ? <p>{errors.zipCode.message}</p> : null}
+      {errors.zipCode?.message ? <p>{errors.zipCode.message}</p> : null} */}
       <input
         {...register("state")}
         type="text"

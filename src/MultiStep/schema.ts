@@ -13,7 +13,11 @@ export const multiStepFormSchema = z.object({
     .nonempty("Este campo é obrigatório.")
     .min(6, "Este campo precisa de pelo menos 6 caracteres.")
     .max(20, "Este campo não pode passar de 20 caracteres."),
-  zipCode: z.string().trim().nonempty("Este campo é obrigatório."),
+  zipCode: z
+    .string()
+    .trim()
+    .nonempty("Este campo é obrigatório.")
+    .transform(zipCode => zipCode.replace(/\D/g, "")),
   state: z.string().trim().nonempty("Este campo é obrigatório."),
   city: z.string().trim().nonempty("Este campo é obrigatório."),
   street: z.string().trim().nonempty("Este campo é obrigatório."),

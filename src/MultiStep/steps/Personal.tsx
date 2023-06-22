@@ -1,9 +1,13 @@
 import { useFormContext } from "react-hook-form"
 import { IFormValues } from "../App"
+import { PatternFormat } from "react-number-format"
 
 export function Personal() {
-  const { register, formState: { errors } } = useFormContext<IFormValues>()
-  
+  const {
+    register,
+    formState: { errors },
+  } = useFormContext<IFormValues>()
+
   return (
     <>
       <input
