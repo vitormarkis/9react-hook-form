@@ -17,6 +17,7 @@ export function Personal() {
         placeholder="First Name"
         autoFocus
         autoComplete="off"
+        tabIndex={20}
       />
       {errors.name?.message ? <p>{errors.name.message}</p> : null}
       <input
@@ -25,6 +26,7 @@ export function Personal() {
         className="form-element-style"
         placeholder="Last Name"
         autoComplete="off"
+        tabIndex={20}
       />
       {errors.surName?.message ? <p>{errors.surName.message}</p> : null}
     </>

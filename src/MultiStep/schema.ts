@@ -23,4 +23,5 @@ export const multiStepFormSchema = z.object({
   street: z.string().trim().nonempty("Este campo é obrigatório."),
   linkedin: z.string().trim().url("Insira uma URL válida."),
   skills: z.array(z.string()).min(1, "Escolha pelo menos 1 especialização."),
+  isMentor: z.boolean(),
 })

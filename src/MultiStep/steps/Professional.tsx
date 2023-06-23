@@ -2,8 +2,11 @@ import { useFormContext } from "react-hook-form"
 import { IFormValues } from "../App"
 
 export function Professional() {
-  const { register, formState: { errors } } = useFormContext<IFormValues>()
-  
+  const {
+    register,
+    formState: { errors },
+  } = useFormContext<IFormValues>()
+
   return (
     <>
       <input
@@ -12,7 +15,7 @@ export function Professional() {
         className="form-element-style"
         placeholder="Linkedin"
         autoComplete="off"
-        autoFocus
+        tabIndex={20}
       />
       {errors.linkedin?.message ? <p>{errors.linkedin.message}</p> : null}
     </>

@@ -26,6 +26,7 @@ export function Location() {
               field.onChange({ ...e, target: { ...e.target, value: newEvent } })
             }}
             onBlur={field.onBlur}
+            tabIndex={20}
           />
         )}
       />
@@ -46,6 +47,7 @@ export function Location() {
         className="form-element-style"
         placeholder="Estado"
         autoComplete="off"
+        tabIndex={20}
       />
       {errors.state?.message ? <p>{errors.state.message}</p> : null}
       <input
@@ -54,6 +56,7 @@ export function Location() {
         className="form-element-style"
         placeholder="Cidade"
         autoComplete="off"
+        tabIndex={20}
       />
       {errors.city?.message ? <p>{errors.city.message}</p> : null}
       <input
@@ -62,6 +65,7 @@ export function Location() {
         className="form-element-style"
         placeholder="Rua"
         autoComplete="off"
+        tabIndex={20}
       />
       {errors.street?.message ? <p>{errors.street.message}</p> : null}
     </>
