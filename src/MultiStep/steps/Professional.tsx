@@ -1,5 +1,6 @@
 import { useFormContext } from "react-hook-form"
 import { IFormValues } from "../App"
+import { Input } from "../components/Input"
 
 export function Professional() {
   const {
@@ -9,15 +10,16 @@ export function Professional() {
 
   return (
     <>
-      <input
+      <Input
         {...register("linkedin")}
         type="text"
-        className="form-element-style"
         placeholder="Linkedin"
         autoComplete="off"
         tabIndex={20}
+        label="Linkedin:"
+        autoFocus
+        errorMessage={errors.linkedin?.message}
       />
-      {errors.linkedin?.message ? <p>{errors.linkedin.message}</p> : null}
     </>
   )
 }

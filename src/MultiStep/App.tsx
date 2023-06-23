@@ -32,7 +32,7 @@ export function App() {
   const methods = useForm<IFormValues>({
     defaultValues,
     resolver: zodResolver(multiStepFormSchema),
-    mode: "onTouched",
+    mode: "all",
   })
   const { step, setStep } = useMultistepForm()
   const { errors } = methods.formState
@@ -73,28 +73,28 @@ export function App() {
             return methods.setError("zipCode", {
               message: "Não foi possível encontrar nenhuma informação com o CEP fornecido.",
             })
-          methods.setValue("city", data.localidade)
-          methods.setValue("street", data.logradouro)
-          methods.setValue("state", data.uf)
+          methods.setValue("city", data.localidade, { shouldValidate: true })
+          methods.setValue("street", data.logradouro, { shouldValidate: true })
+          methods.setValue("state", data.uf, { shouldValidate: true })
         })
         .catch(console.log)
     }
   }, [zipCode])
 
   return (
-    <div className="bg-slate-900 min-h-screen grid place-items-center text-white overflow-y-scroll">
+    <div className="bg-neutral-900 min-h-screen grid place-items-center text-white overflow-y-scroll">
       <div className="flex gap-8 max-w-7xl w-full p-4">
         <FormProvider {...methods}>
           <form
             onSubmit={methods.handleSubmit(submitHandler)}
-            className="relative flex flex-col gap-4 p-6 pt-10 flex-1 rounded-lg shadow-md shadow-slate-800 bg-slate-950 [&_input]:bg-slate-800"
+            className="relative flex flex-col gap-4 p-6 pt-10 flex-1 rounded-lg shadow-md shadow-neutral-800 bg-neutral-950 [&_input]:bg-neutral-800"
           >
             {step === 0 ? <Personal /> : null}
             {step === 1 ? <Professional /> : null}
             {step === 2 ? <Location /> : null}
             {step === 3 ? <Experience /> : null}
             <div className="absolute flex items-center right-0 top-0 shadow-md -translate-y-1/2 text-xs">
-              <p className="leading-none p-1 rounded-l-full bg-slate-800 border-slate-700 text-slate-300 border pl-4 pr-16 translate-x-14 z-[-1]">
+              <p className="leading-none whitespace-nowrap p-1 rounded-l-full bg-neutral-800 border-neutral-700 text-neutral-300 border pl-4 pr-16 translate-x-14 z-[-1]">
                 Você deseja ser
               </p>
               <Controller
@@ -102,7 +102,6 @@ export function App() {
                 control={methods.control}
                 render={({ field }) => (
                   <SwitchMentor
-                    autoFocus={step === 0}
                     tabIndex={10}
                     isMentor={isMentor}
                     {...field}
@@ -123,8 +122,11 @@ export function App() {
               )}
               <button
                 type={isInLastStep ? "submit" : "button"}
+                // type="submit"
                 className="form-element-style button-style bg-emerald-500 disabled:bg-emerald-700"
                 onClick={handleActionButton}
+                onClickCapture={() => console.log("Capturou")}
+                onAuxClick={() => console.log("Capturou")}
                 disabled={!shouldGoForward}
                 tabIndex={25}
               >
@@ -170,7 +172,7 @@ export const SwitchMentor: React.FC<ISwitchMentor> = ({
   return (
     <button
       type="button"
-      className={"relative flex bg-slate-700 p-0.5 rounded-full group" + _cn}
+      className={"relative flex bg-neutral-700 p-0.5 rounded-full group" + _cn}
       ref={ref}
       onBlur={onBlur}
       onKeyUp={e => {
@@ -180,7 +182,7 @@ export const SwitchMentor: React.FC<ISwitchMentor> = ({
       {...rest}
     >
       <div
-        className={`bg-slate-800 rounded-full absolute top-0.5 bottom-0.5 left-0.5 transition-all duration-150 ease-in-out`}
+        className={`bg-neutral-800 rounded-full absolute top-0.5 bottom-0.5 left-0.5 transition-all duration-150 ease-in-out`}
         style={{ width, transform }}
       />
       <span

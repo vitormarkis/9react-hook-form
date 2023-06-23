@@ -35,8 +35,7 @@ export const Select = ({
 }: ISelect) => {
   const _cn = className ? ` ${className}` : ""
 
-  const [isShowingOptionsModal, setIsShowingOptionsModal] =
-    React.useState(false)
+  const [isShowingOptionsModal, setIsShowingOptionsModal] = React.useState(false)
   const SelectRef = React.useRef<HTMLDivElement>(null)
   const showingOptions = options.filter(opt => !value.includes(opt))
 
@@ -62,12 +61,12 @@ export const Select = ({
 
   return (
     <div
-      className="relative font-normal text-slate-400"
+      className="relative font-normal text-neutral-400"
       ref={SelectRef}
       tabIndex={0}
     >
       <SelectInput
-        className={"form-element-style py-3 bg-slate-800 " + _cn}
+        className={"form-element-style py-3 bg-neutral-800 " + _cn}
         onClick={handleClickSelect}
         ref={ref}
         {...rest}
@@ -76,12 +75,12 @@ export const Select = ({
           value.map(selectedOption => (
             <SelectedOption
               key={selectedOption}
-              className="py-1 px-4 bg-slate-600 text-xs"
+              className="py-1 px-4 bg-neutral-600 text-xs"
             >
               <span className="select-none">{selectedOption}</span>
               <ButtonRemoveSelectedOption
                 onClick={handleRemoveTag(selectedOption)}
-                className="hover:bg-slate-700"
+                className="hover:bg-neutral-700"
               >
                 <IconX
                   size={12}
@@ -91,13 +90,13 @@ export const Select = ({
             </SelectedOption>
           ))
         ) : (
-          <TextPlaceholderSelect className="py-1 text-slate-400">
+          <TextPlaceholderSelect className="py-1 text-neutral-400">
             Selecione uma especialização
           </TextPlaceholderSelect>
         )}
         <ButtonClearAllOptions
           onClick={handleClearAllOptions}
-          className="hover:bg-slate-700"
+          className="hover:bg-neutral-700"
         >
           <IconTrash
             size={18}
@@ -106,7 +105,7 @@ export const Select = ({
         </ButtonClearAllOptions>
       </SelectInput>
       {isShowingOptionsModal ? (
-        <ModalSelectOptions className="p-4 bg-slate-800 border border-slate-950">
+        <ModalSelectOptions className="p-4 bg-neutral-800 border border-neutral-950">
           {showingOptions.length === 0 ? (
             <ModalTextAllOptionsSelected className="px-2 text-neutral-01">
               {textAllOptionsSelected ?? "Todas opções foram selecionadas."}
@@ -116,7 +115,7 @@ export const Select = ({
               <ModalOption
                 key={option}
                 onClick={handleChooseOption(option)}
-                className="py-2 px-4 hover:bg-slate-700 rounded-lg"
+                className="py-2 px-4 hover:bg-neutral-700 rounded-lg"
               >
                 <span className="select-none">{option}</span>
               </ModalOption>

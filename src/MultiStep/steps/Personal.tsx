@@ -1,6 +1,6 @@
 import { useFormContext } from "react-hook-form"
 import { IFormValues } from "../App"
-import { PatternFormat } from "react-number-format"
+import { Input } from "../components/Input"
 
 export function Personal() {
   const {
@@ -10,25 +10,25 @@ export function Personal() {
 
   return (
     <>
-      <input
+      <Input
         {...register("name")}
         type="text"
-        className="form-element-style"
-        placeholder="Meu nome"
+        placeholder="Seu nome"
         autoFocus
         autoComplete="off"
         tabIndex={20}
+        label="Nome:"
+        errorMessage={errors.name?.message}
       />
-      {errors.name?.message ? <p>{errors.name.message}</p> : null}
-      <input
+      <Input
         {...register("surName")}
         type="text"
-        className="form-element-style"
-        placeholder="Meu sobrenome"
+        placeholder="Seu sobre nome"
         autoComplete="off"
         tabIndex={20}
+        label="Sobrenome:"
+        errorMessage={errors.surName?.message}
       />
-      {errors.surName?.message ? <p>{errors.surName.message}</p> : null}
     </>
   )
 }

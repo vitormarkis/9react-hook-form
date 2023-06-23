@@ -1,6 +1,7 @@
 import { useFormContext, Controller } from "react-hook-form"
 import { IFormValues } from "../App"
 import { PatternFormat } from "react-number-format"
+import { Input } from "../components/Input"
 
 export function Location() {
   const {
@@ -15,59 +16,45 @@ export function Location() {
         name="zipCode"
         control={control}
         render={({ field }) => (
-          <PatternFormat
-            className="form-element-style"
-            defaultValue={field.value}
-            valueIsNumericString
-            format="#####-###"
+          <Input
+            asChild
+            label="CEP:"
+            errorMessage={errors.zipCode?.message}
             placeholder="00000-000"
+            defaultValue={field.value}
             onChange={e => {
               const newEvent = e.target.value.replace(/\D/g, "")
-              field.onChange({ ...e, target: { ...e.target, value: newEvent } })
+              field.onChange(newEvent)
             }}
             onBlur={field.onBlur}
-            tabIndex={20}
-          />
+            autoFocus
+          >
+            <PatternFormat
+              valueIsNumericString
+              format="#####-###"
+            />
+          </Input>
         )}
       />
-      {errors.zipCode?.message ? <p>{errors.zipCode.message}</p> : null}
 
-      {/* <input
-        {...register("zipCode")}
-        type="text"
-        className="form-element-style"
-        placeholder="00.000-000"
-        autoComplete="off"
-        autoFocus
-      />
-      {errors.zipCode?.message ? <p>{errors.zipCode.message}</p> : null} */}
-      <input
+      <Input
         {...register("state")}
-        type="text"
-        className="form-element-style"
         placeholder="Estado"
-        autoComplete="off"
-        tabIndex={20}
+        label="Estado:"
+        errorMessage={errors.state?.message}
       />
-      {errors.state?.message ? <p>{errors.state.message}</p> : null}
-      <input
+      <Input
         {...register("city")}
-        type="text"
-        className="form-element-style"
         placeholder="Cidade"
-        autoComplete="off"
-        tabIndex={20}
+        label="Cidade:"
+        errorMessage={errors.city?.message}
       />
-      {errors.city?.message ? <p>{errors.city.message}</p> : null}
-      <input
+      <Input
         {...register("street")}
-        type="text"
-        className="form-element-style"
         placeholder="Rua"
-        autoComplete="off"
-        tabIndex={20}
+        label="Rua:"
+        errorMessage={errors.street?.message}
       />
-      {errors.street?.message ? <p>{errors.street.message}</p> : null}
     </>
   )
 }
