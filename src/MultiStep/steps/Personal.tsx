@@ -14,7 +14,7 @@ export function Personal() {
         {...register("name")}
         type="text"
         className="form-element-style"
-        placeholder="First Name"
+        placeholder="Meu nome"
         autoFocus
         autoComplete="off"
         tabIndex={20}
@@ -24,7 +24,7 @@ export function Personal() {
         {...register("surName")}
         type="text"
         className="form-element-style"
-        placeholder="Last Name"
+        placeholder="Meu sobrenome"
         autoComplete="off"
         tabIndex={20}
       />
